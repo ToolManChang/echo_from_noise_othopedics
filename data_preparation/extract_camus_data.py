@@ -31,22 +31,27 @@ def generate_save_path(save_folder_path, folder_type, save_patient_name, save_se
 
 
 def save_all_camus_imgs(in_data_folder, save_folder, img_save_size, selected_view_name,
-                        train_test_type):
+                        train_list, val_list, test_list):
     patient_folders = natsorted(glob.glob(os.path.join(in_data_folder, 'patient*')))
     for idx, patient_folder in enumerate(patient_folders):
         __, patient_name = os.path.split(patient_folder)
         patient_idx = int(patient_name.split('patient')[-1])
 
-        patient_img_file_name = patient_name + '_' + selected_view_name + '.mhd'
-        patient_gt_file_name = patient_name + '_' + selected_view_name + '_gt.mhd'
+        # print(train_list)
+
+        patient_img_file_name = patient_name + '_' + selected_view_name + '.nii.gz'
+        patient_gt_file_name = patient_name + '_' + selected_view_name + '_gt.nii.gz'
 
         loaded_img = load_mhd_img(os.path.join(patient_folder, patient_img_file_name), img_out_size=img_save_size)
         loaded_gt_img = load_mhd_img(os.path.join(patient_folder, patient_gt_file_name), img_out_size=img_save_size)
 
-        if patient_idx <= 50 and train_test_type == 'training':  # first 50 patients in training are set to validation
-            save_train_test_type = 'validation'
-        else:
-            save_train_test_type = train_test_type
+        if patient_name in train_list:
+            save_train_test_type = 'train'
+        elif patient_name in val_list:
+            save_train_test_type = 'val'
+        elif patient_name in test_list:
+            save_train_test_type = 'test'
+        
 
         new_view_folder = os.path.join(save_folder, selected_view_name)
         all_views_folder = os.path.join(save_folder, 'all_views')
@@ -70,15 +75,22 @@ def save_all_camus_imgs(in_data_folder, save_folder, img_save_size, selected_vie
 
 if __name__ == '__main__':
 
-    camus_data_folder = r'/path/to/camus/data'
-    save_folder_path = r'/path/to/save/folder'
+    camus_data_folder = r'/home/yunkao/git/echo_from_noise/data_preparation/CAMUS_public/database_nifti'
+    save_folder_path = r'/home/yunkao/git/echo_from_noise/data_preparation/CAMUS_prepared_data'
+    camus_split_folder = r'/home/yunkao/git/echo_from_noise/data_preparation/CAMUS_public/database_split/'
     save_img_size = (256, 256)
 
-    view_names = ['2CH_ED', '2CH_ES', '4CH_ED', '4CH_ES']
-    train_test_names = ['training', 'testing']
-    for view_name in view_names:
-        for name in train_test_names:
-            data_folder = os.path.join(camus_data_folder, name)
+    with open(os.path.join(camus_split_folder, 'subgroup_training.txt')) as f:
+        train_list = f.read().splitlines()
+    with open(os.path.join(camus_split_folder, 'subgroup_validation.txt')) as f:
+        val_list = f.read().splitlines()
+    with open(os.path.join(camus_split_folder, 'subgroup_testing.txt')) as f:
+        test_list = f.read().splitlines()
 
-            save_all_camus_imgs(data_folder, save_folder_path, save_img_size, selected_view_name=view_name,
-                                train_test_type=name)
+    view_names = ['2CH_ED', '2CH_ES', '4CH_ED', '4CH_ES']
+    
+    for view_name in view_names:
+        data_folder = camus_data_folder
+
+        save_all_camus_imgs(data_folder, save_folder_path, save_img_size, selected_view_name=view_name,
+                            train_list=train_list, val_list=val_list, test_list=test_list)

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#SBATCH --gres=gpumem:50g
+#SBATCH --ntasks=4
+#SBATCH --nodes=1
+#SBATCH --gpus-per-node=1
+#SBATCH --time=12:00:00
+#SBATCH -o output_log
+
+
+module load stack/2024-06 gcc/12.2.0 openmpi/4.1.6
+
+mpiexec -np 1 python3 /cluster/project/krause/yunkao/echo_from_noise/semantic_diffusion_model/image_train.py \
+ --datadir /cluster/project/krause/yunkao/echo_from_noise/data_preparation/CAMUS_augmented_data/2CH_ED_augmented \
+ --savedir /cluster/project/krause/yunkao/echo_from_noise/output --batch_size_train 12  --is_train True \
+ --save_interval 5000 --lr_anneal_steps 50000 --random_flip True --deterministic_train False  --img_size 256

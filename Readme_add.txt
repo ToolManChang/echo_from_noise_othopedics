@@ -1,0 +1,3 @@
+-install openmpi: module load stack/2024-06 gcc/12.2.0 openmpi/4.1.6
+-install opencv-python
+-modify .mdh in extract_camus_data.py to .nii.gz

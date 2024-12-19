@@ -1,0 +1,21 @@
+[2024-12-19 16:23:28,827] [INFO] [real_accelerator.py:110:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-12-19 16:23:28,827] [INFO] [real_accelerator.py:110:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-12-19 16:23:32,717] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-12-19 16:23:32,717] [INFO] [comm.py:594:init_distributed] cdb=None
+[2024-12-19 16:23:32,717] [WARNING] [comm.py:152:init_deepspeed_backend] NCCL backend in DeepSpeed not yet implemented
+[2024-12-19 16:23:32,717] [INFO] [comm.py:594:init_distributed] cdb=None
+[2024-12-19 16:23:32,717] [INFO] [comm.py:609:init_distributed] Not using the DeepSpeed or dist launchers, attempting to detect MPI environment...
+[2024-12-19 16:23:32,717] [INFO] [comm.py:609:init_distributed] Not using the DeepSpeed or dist launchers, attempting to detect MPI environment...
+[2024-12-19 16:23:32,761] [INFO] [comm.py:659:mpi_discovery] Discovered MPI settings of world_rank=1, local_rank=1, world_size=2, master_addr=10.205.9.15, master_port=29500
+[2024-12-19 16:23:32,761] [INFO] [comm.py:659:mpi_discovery] Discovered MPI settings of world_rank=0, local_rank=0, world_size=2, master_addr=10.205.9.15, master_port=29500
+[2024-12-19 16:23:32,761] [INFO] [comm.py:625:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+Logging to /cluster/project/krause/yunkao/echo_from_noise/output
+creating model and diffusion...
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpiexec noticed that process rank 1 with PID 2315104 on node eu-a65-06 exited on signal 9 (Killed).
+--------------------------------------------------------------------------
+slurmstepd: error: Detected 1 oom_kill event in StepId=18713723.batch. Some of the step tasks have been OOM Killed.

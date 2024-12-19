@@ -244,9 +244,11 @@ def main():
     args = get_args_from_command_line()
 
     if args.datadir is not None:
+        # print('datadir:', args.datadir)
         cfg.DATASETS.DATADIR = args.datadir
     if args.savedir is not None:
         cfg.TRAIN.SAVE_DIR = args.savedir
+        cfg.DATASETS.SAVEDIR = args.savedir
     if args.dataset_mode is not None:
         cfg.DATASETS.DATASET_MODE = args.dataset_mode
     if args.learn_sigma is not None:

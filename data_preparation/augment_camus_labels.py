@@ -84,8 +84,8 @@ def generate_save_path(view_folder, folder_type, train_or_val_type, patient_id, 
 
 
 if __name__ == '__main__':
-    data_folder = r'/path/to/camus/data'
-    save_folder = r'/path/to/save'
+    data_folder = r'/home/yunkao/git/echo_from_noise/data_preparation/CAMUS_prepared_data'
+    save_folder = r'/home/yunkao/git/echo_from_noise/data_preparation/CAMUS_augmented_data'
     n_repeat = 5
     add_augmentation = True
     debug_plot = False
