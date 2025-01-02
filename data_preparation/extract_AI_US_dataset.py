@@ -74,7 +74,7 @@ def save_dataset_list(in_data_folder, save_folder, img_save_size,
 
                 cv2.imwrite(img_save_path, loaded_img)
                 cv2.imwrite(annotations_save_path, loaded_gt_img)
-            print('Done with {} patients for record {}'.format(patient, record_name))
+                print('Done with {} patients for record {} image {}'.format(patient, record_name, id))
 
 
 def save_all_imgs(in_data_folder, save_folder, img_save_size,
@@ -87,8 +87,8 @@ def save_all_imgs(in_data_folder, save_folder, img_save_size,
 
 if __name__ == '__main__':
 
-    camus_data_folder = r'data_preparation/AI_Ultrasound_dataset'
-    save_folder_path = r'data_preparation/AI_Ultrasound_processed'
+    camus_data_folder = r'/cluster/project/krause/yunkao/echo_from_noise/data_preparation/AI_Ultrasound_dataset'
+    save_folder_path = r'/cluster/project/krause/yunkao/echo_from_noise/data_preparation/AI_Ultrasound_processed'
     save_img_size = (256, 256)
     
     train_list = ['cadaver01_F231091',

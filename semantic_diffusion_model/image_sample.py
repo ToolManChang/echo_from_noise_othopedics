@@ -482,8 +482,11 @@ def preprocess_input(data, num_classes):
     # create one-hot label map
     label_map = data['label']
     bs, _, h, w = label_map.size()
-    input_label = th.FloatTensor(bs, num_classes, h, w).zero_()
-    input_semantics = input_label.scatter_(1, label_map, 1.0)
+    if num_classes==1:
+        input_semantics = data['label']
+    else:
+        input_label = th.FloatTensor(bs, num_classes, h, w).zero_()
+        input_semantics = input_label.scatter_(1, label_map, 1.0)
 
     # concatenate instance map if it exists
     if 'instance' in data:

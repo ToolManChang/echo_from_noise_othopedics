@@ -5,12 +5,12 @@
 #SBATCH --mem-per-cpu=8000
 #SBATCH --gpus-per-node=4
 #SBATCH --time=24:00:00
-#SBATCH -o output_log
+#SBATCH -o output_log_style
 
 
 module load stack/2024-06 gcc/12.2.0 openmpi/4.1.6
 
 mpiexec -np 4 python3 /cluster/project/krause/yunkao/echo_from_noise/semantic_diffusion_model/image_train.py \
- --datadir /cluster/project/krause/yunkao/echo_from_noise/data_preparation/CAMUS_augmented_data/2CH_ED_augmented \
- --savedir /cluster/project/krause/yunkao/echo_from_noise/output --batch_size_train 12  --is_train True \
+ --datadir /cluster/project/krause/yunkao/echo_from_noise/data_preparation/AI_Ultrasound_processed --num_classes 256 \
+ --savedir /cluster/project/krause/yunkao/echo_from_noise/output_style --batch_size_train 4  --is_train True \
  --save_interval 10000 --lr_anneal_steps 50000 --random_flip True --deterministic_train False  --img_size 256
